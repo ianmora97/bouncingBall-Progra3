@@ -5,7 +5,7 @@ public class Racket extends Actor {
     public int w;
     public int h;
 
-    public Racket(int x, int y, int w, int h, int dx, int dy) {
+    public Racket(int x, int y, int w, int h, double dx, double dy) {
         super(x, y, dx, dy);
         this.w = w;
         this.h = h;
@@ -18,7 +18,7 @@ public class Racket extends Actor {
         else if(x+dx<m.r.getX()){
             dx= 0;
         }
-        x = x + dx;
+        x = x + (int)dx;
 
         if(y+dy+h>m.r.getH()+m.r.getX()){
             dy =0;
@@ -26,7 +26,7 @@ public class Racket extends Actor {
         else if(y+dy<m.r.getY()){
             dy=0;
         }
-        y = y + dy;
+        y = y + (int)dy;
         
     }
 

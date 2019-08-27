@@ -94,7 +94,7 @@ public class View extends JFrame implements java.util.Observer{
         media.drawImage(raqueta, (int)(r.x), (int)(r.y),r.w ,r.h ,this);
         this.update(model,media);
     }
-    void renderRectangle(Rectangle r, Graphics media){
+    void renderRectangle(Circulo r, Graphics media){
         media.drawImage(fondo, (int)(r.x), (int)(r.y),r.w, r.h ,this);
         this.update(model,media);
     }
