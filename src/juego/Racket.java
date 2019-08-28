@@ -5,29 +5,24 @@ public class Racket extends Actor {
     public int w;
     public int h;
 
-    public Racket(int x, int y, int w, int h, double dx, double dy) {
+    public Racket(int x, int y, int w, int h, int dx, int dy) {
         super(x, y, dx, dy);
         this.w = w;
         this.h = h;
     }
-
+    @Override
     public void move(Model m) {
-        if((x+dx+w>m.r.getW()+m.r.getX())){
-            dx= 0;
-        }
-        else if(x+dx<m.r.getX()){
-            dx= 0;
-        }
-        x = x + (int)dx;
 
-        if(y+dy+h>m.r.getH()+m.r.getX()){
-            dy =0;
-        }
-        else if(y+dy<m.r.getY()){
-            dy=0;
-        }
-        y = y + (int)dy;
         
+        
+        x = x + dx;
+
+        y = y + dy;
+        int suma,resta;
+        suma = m.r.x + m.r.r;
+        resta = m.r.y - m.r.r;
+        System.out.println("X: "+ x + " Y: " + y + " W: " + w + " H:" + h + " x-R: "+ (resta) + " x+R: " + suma );
+
     }
 
     public int getW() {
@@ -37,7 +32,5 @@ public class Racket extends Actor {
     public int getH() {
         return h;
     }
-    
-    
 
 }

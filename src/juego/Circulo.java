@@ -1,17 +1,23 @@
-
 package juego;
 
 public class Circulo {
-    int x;
-    int y;
-    int w;
-    int h;
 
-    public Circulo(int x, int y, int w, int h) {
+    public int x;
+    public int y;
+    public int r;
+
+    public void setR(int r) {
+        this.r = r;
+    }
+
+    public int getR() {
+        return r;
+    }
+
+    public Circulo(int x, int y, int r) {
         this.x = x;
         this.y = y;
-        this.w = w;
-        this.h = h;
+        this.r = r;
     }
 
     public int getX() {
@@ -22,14 +28,6 @@ public class Circulo {
         return y;
     }
 
-    public int getW() {
-        return w;
-    }
-
-    public int getH() {
-        return h;
-    }
-
     public void setX(int x) {
         this.x = x;
     }
@@ -37,15 +35,4 @@ public class Circulo {
     public void setY(int y) {
         this.y = y;
     }
-
-    public void setW(int w) {
-        this.w = w;
-    }
-
-    public void setH(int h) {
-        this.h = h;
-    }
-    
-    
-    
 }

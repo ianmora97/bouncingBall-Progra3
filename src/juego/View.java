@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 public class View extends JFrame implements java.util.Observer{
     Model model;
     Controller controller;
+    
     public static final String BALL_PATH = "media/ball.png";
     public static final String FONDO_PATH = "media/fondo.png";
     public static final String RAQUETA_PATH = "media/raqueta.png";
@@ -22,9 +23,11 @@ public class View extends JFrame implements java.util.Observer{
     Image ballImage;
     Image fondo;
     Image raqueta;
+    
     public View(){
         
-        this.setSize(800,800);
+        this.setSize(630,650);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.addKeyListener(new java.awt.event.KeyAdapter(){
             @Override
@@ -38,7 +41,7 @@ public class View extends JFrame implements java.util.Observer{
         });
         try {
             ballImage = ImageIO.read(getClass().getResourceAsStream(BALL_PATH));
-            fondo =ImageIO.read(getClass().getResourceAsStream(FONDO_PATH));
+            fondo = ImageIO.read(getClass().getResourceAsStream(FONDO_PATH));
             raqueta =ImageIO.read(getClass().getResourceAsStream(RAQUETA_PATH));
         } catch (Exception ex) {}
     }
@@ -82,7 +85,7 @@ public class View extends JFrame implements java.util.Observer{
     }
     void renderModel(Model m, Graphics media){
         renderBall(m.b,media);
-        renderRectangle(m.r,media);
+        renderCircle(m.r,media);
         renderRacket(m.a,media);
         this.update(model,media);
     }
@@ -91,11 +94,13 @@ public class View extends JFrame implements java.util.Observer{
         this.update(model,media);
     }
     void renderRacket(Racket r, Graphics media){
-        media.drawImage(raqueta, (int)(r.x), (int)(r.y),r.w ,r.h ,this);
+        media.drawImage(raqueta, (int)(r.x), (int)(r.y), r.w ,r.h ,this);
         this.update(model,media);
     }
-    void renderRectangle(Circulo r, Graphics media){
-        media.drawImage(fondo, (int)(r.x), (int)(r.y),r.w, r.h ,this);
+    void renderCircle(Circulo r, Graphics media){
+//        media.drawImage(fondo, (int)(r.x), (int)(r.y),600 ,600 ,this);
+        media.setColor(Color.white);
+        media.fillOval(r.x, r.y , 600, 600);
         this.update(model,media);
     }
 }
