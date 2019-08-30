@@ -18,11 +18,8 @@ public class Racket extends Actor {
         x = x + dx;
 
         y = y + dy;
-        int suma,resta;
-        suma = x + w;
-        resta = y+h;
-        int radioGrande = m.c.r ;
-        System.out.println("R + X: "+ radioGrande + " Y: " + y + " W: " + w + " H:" + h + " x+w: "+ (suma) + " y+h: " + resta );
+        
+       
 
     }
 

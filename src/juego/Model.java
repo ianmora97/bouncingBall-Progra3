@@ -18,11 +18,11 @@ public class Model extends Observable {
     
     public Model(){
         c = new Circulo(10,35,300);
-        b = new Ball(300,300,40,5,5);
+        b = new Ball(300,300,40,2,2);
         a = new Racket(150,430,75,20,0,0);
     }
     public void start(){
-        final int delay = 90;
+        final int delay = 20;
         Runnable code = new Runnable() {
             @Override
             public void run() {

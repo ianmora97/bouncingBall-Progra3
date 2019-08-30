@@ -1,5 +1,6 @@
 package juego;
 import java.lang.Math;
+import java.util.Random;
 
 public class Ball extends Actor {
 
@@ -8,29 +9,46 @@ public class Ball extends Actor {
     
     @Override
     public void move(Model b) {
-//        if((y < b.a.y) && (dy > 0) && (y + r >= b.a.y) && (b.a.x < x+r )&& x-r < b.a.x + b.a.w){
-//            dy = -dy;
-//        }
-//        if((y > b.a.y) && (dy < 0) && (y + r >= b.a.y) && (b.a.x > x+r )&& x-r > b.a.x + b.a.w){
-//            dy = -dy;
-//        }
-//        if (x + dx + r > b.r.r + b.r.getX() +19|| x + dx + r -70 < b.r.getX()) {
-//            dx = dx - (dx * 2);
-//            
-//        }
-//        if (y + dy + r > b.r.r + b.r.getY() +15|| y + dy + r -75 < b.r.getY()) {
-//            dy = dy - (dy * 2);
-//            
-//        }
-//        
-//        x += dx;
-//        y += dy;
-        if(this.pitagoras(b.b.x - b.c.x, b.b.y - b.c.y) > Math.abs(b.b.r - b.c.r)){
-            dx = -dx;
-            dy = -dy;
+        Random r = new Random();
+        int valorDado;
+        
+        double dxa = this.x - b.c.r;
+        double dya = this.y - b.c.r;
+        double distanceFromCenter = Math.sqrt(dxa * dxa + dya * dya);
+        
+        
+        if(distanceFromCenter >= b.c.r - this.r){
+            valorDado = r.nextInt(5) + 1;
+            System.out.println("Rand: " + valorDado+ " Dx: " + dx + " Dy: " + dy);
+//            this.dx = this.dx - (this.dx * 2);
+//            this.dy = this.dy - (this.dy * 2);
+            switch(valorDado){
+                case 1: dx = -dx;  dy = -dy ; break;
+                case 2: 
+                    if(dy != 0){dx = 0; dy = dy; }
+                    else{break;}
+                    break;
+                case 3:
+                    if(dx != 0){dx = dx; dy = 0;}
+                    else{break;}
+                    break;
+                case 4:
+                    if(dy == 0){dx = dx; dy = 2;}
+                    else{break;}
+                    break;
+                case 5:
+                    if(dx == 0){dx = 2; dy = dy;}
+                    else{break;}
+                    break;
+                    
+            }
         }
-           x += dx;
-           y += dy;
+        if((y+dy+this.getR()>b.a.getH()+b.a.getY())||y+dy-this.getR()<b.a.getY()){
+            dy= dy-(dy * 2);
+        }
+        
+        this.x += this.dx;
+        this.y += this.dy;
     }
 
     public Ball(int x, int y, int r, int dx, int dy) {
@@ -41,9 +59,7 @@ public class Ball extends Actor {
     public void setR(int r) {
         this.r = r;
     }
-    public double pitagoras(int x, int y){
-        return Math.sqrt(x*x + y*y);
-    }
+
     public int getR() {
         return r;
     }
