@@ -19,9 +19,10 @@ public class Racket extends Actor {
 
         y = y + dy;
         int suma,resta;
-        suma = m.r.x + m.r.r;
-        resta = m.r.y - m.r.r;
-        System.out.println("X: "+ x + " Y: " + y + " W: " + w + " H:" + h + " x-R: "+ (resta) + " x+R: " + suma );
+        suma = x + w;
+        resta = y+h;
+        int radioGrande = m.c.r ;
+        System.out.println("R + X: "+ radioGrande + " Y: " + y + " W: " + w + " H:" + h + " x+w: "+ (suma) + " y+h: " + resta );
 
     }
 

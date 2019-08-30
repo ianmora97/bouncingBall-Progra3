@@ -1,6 +1,9 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package juego;
-
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,9 +13,11 @@ import java.util.Observer;
 import javax.swing.JFrame;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public class View extends JFrame implements java.util.Observer{
+public class View extends javax.swing.JFrame implements Observer{
+
     Model model;
     Controller controller;
     
@@ -23,8 +28,10 @@ public class View extends JFrame implements java.util.Observer{
     Image ballImage;
     Image fondo;
     Image raqueta;
+   
     
-    public View(){
+    public View() {
+        initComponents();
         
         this.setSize(630,650);
         this.setLocationRelativeTo(null);
@@ -44,7 +51,9 @@ public class View extends JFrame implements java.util.Observer{
             fondo = ImageIO.read(getClass().getResourceAsStream(FONDO_PATH));
             raqueta =ImageIO.read(getClass().getResourceAsStream(RAQUETA_PATH));
         } catch (Exception ex) {}
+       
     }
+
     private void formKeyPressed(java.awt.event.KeyEvent evt){
         switch(evt.getKeyCode()){
                 case KeyEvent.VK_UP : controller.move(Model.ARR); break;
@@ -66,7 +75,8 @@ public class View extends JFrame implements java.util.Observer{
     }
     @Override
     public void paint(Graphics g){
-//        super.paint(g);
+        
+        super.paint(g);
         this.renderModel(model, g);
         this.update(model,g);
     }
@@ -85,7 +95,7 @@ public class View extends JFrame implements java.util.Observer{
     }
     void renderModel(Model m, Graphics media){
         renderBall(m.b,media);
-        renderCircle(m.r,media);
+        renderCircle(m.c,media);
         renderRacket(m.a,media);
         this.update(model,media);
     }
@@ -103,4 +113,64 @@ public class View extends JFrame implements java.util.Observer{
         media.fillOval(r.x, r.y , 600, 600);
         this.update(model,media);
     }
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    
+    public static void main(String args[]) throws Exception{
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                Model model = new Model();
+                View view = new View();
+                Controller controller = new Controller(model, view);
+                view.setVisible(true);
+                model.start();
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // End of variables declaration//GEN-END:variables
 }

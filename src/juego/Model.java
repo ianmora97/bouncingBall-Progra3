@@ -7,7 +7,7 @@ import sun.util.logging.PlatformLogger;
 
 public class Model extends Observable {
     
-    public Circulo r;
+    public Circulo c;
     public Ball b;
     public Racket a;
     
@@ -17,7 +17,7 @@ public class Model extends Observable {
     public static final int DER = 4;
     
     public Model(){
-        r = new Circulo(10,35,300);
+        c = new Circulo(10,35,300);
         b = new Ball(300,300,40,5,5);
         a = new Racket(150,430,75,20,0,0);
     }
@@ -73,8 +73,8 @@ public class Model extends Observable {
         return b;
     }
 
-    public Circulo getR() {
-        return r;
+    public Circulo getC() {
+        return c;
     }
 
     public Racket getA() {
