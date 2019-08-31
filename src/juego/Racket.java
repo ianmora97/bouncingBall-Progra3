@@ -17,7 +17,7 @@ public class Racket extends Actor {
         
         x += dx;
         y += dy;
-        
+        System.out.println("x: " + x + " y: "+ y);
     }
 
     public int getW() {

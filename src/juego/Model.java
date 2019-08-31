@@ -11,6 +11,8 @@ public class Model extends Observable {
     public Ball b;
     public Racket a;
     public ArrayList<Ball> listabolas;
+    public ArrayList<Arcos> listaArcos;
+    public score s;
     
     public static final int ARR = 1;
     public static final int ABA = 2;
@@ -19,9 +21,10 @@ public class Model extends Observable {
     
     public Model(){
         c = new Circulo(350,350,300);
-        b = new Ball(300,300,40,5,-5);
+        b = new Ball(300,300,30,3,-3);
         a = new Racket(300,300,100,30,0,0);
-        
+        s = new score(0);
+        setArcos();
     }
     public void reset(int esferas, int velocidad){
         listabolas = new ArrayList<>();
@@ -30,8 +33,21 @@ public class Model extends Observable {
         }
         
     }
+    private void setArcos(){
+        listaArcos = new ArrayList<>();
+        listaArcos.add(new Arcos(245,55,200,30,0,180));//n
+        listaArcos.add(new Arcos(245,620,200,30,180,180));//s
+        listaArcos.add(new Arcos(612,250,30,200,270,180));//e
+        listaArcos.add(new Arcos(49,250,30,200,90,180));//o
+        //red
+        listaArcos.add(new Arcos(70, 90, 350,350,110,50));//NO
+        listaArcos.add(new Arcos(300,90,300,300,20,50));//NE
+        listaArcos.add(new Arcos(80,300,300,300,190,60));//SO
+        listaArcos.add(new Arcos(300,300,300,300,300,50));//SE
+
+    }
     public void start(){
-        final int delay = 20;
+        final int delay = 30;
         Runnable code = new Runnable() {
             @Override
             public void run() {

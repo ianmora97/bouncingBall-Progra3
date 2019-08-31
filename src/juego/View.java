@@ -2,6 +2,7 @@
 package juego;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Observable;
@@ -77,9 +78,9 @@ public class View extends javax.swing.JFrame implements Observer{
     @Override
     public void paint(Graphics g){
         
-       super.paint(g);
+       //super.paint(g);
         this.renderModel(model, g);
-        
+        //
     }
     public void setModel(Model model) {
         this.model = model;
@@ -96,15 +97,31 @@ public class View extends javax.swing.JFrame implements Observer{
     }
     void renderModel(Model m, Graphics media){
         
-        
-        
-        
+            
         renderCircle(m.c,media);
         renderRacket(m.a,media);
         renderBall(m.b,media);
-        
-        
-        
+        renderScore(m.s, media);
+        for(int i=0;i<4;i++){
+            renderArcs(m.listaArcos.get(i), media);
+            
+        }
+        for(int i=4;i<8;i++){
+            renderArcsRed(m.listaArcos.get(i), media);
+           
+        }
+        //this.update(model, media);
+    }
+    public void renderArcs(Arcos r, Graphics media){
+        media.setColor(Color.GREEN);
+        media.fillArc(r.x, r.y, r.h, r.l, r.s, r.f);
+        media.drawArc(r.x, r.y, r.h, r.l, r.s, r.f);
+    }
+    public void renderArcsRed(Arcos r, Graphics media){
+        media.setColor(Color.RED);
+//       media.drawLine(r.x, r.y, r.h, r.l);
+//        media.fillArc(r.x, r.y, r.h, r.l, r.s, r.f);
+        media.drawArc(r.x, r.y, r.h, r.l, r.s, r.f);
     }
     public void renderBall(Ball b, Graphics media){
         media.drawImage(ball, (int)(b.x-b.r), (int)(b.y-b.r),2* b.r ,2* b.r ,this);
@@ -117,6 +134,12 @@ public class View extends javax.swing.JFrame implements Observer{
     public void renderCircle(Circulo r, Graphics media){
         media.drawImage(fondoCirculo, 30, 40, r.r *2 +30 , r.r *2 + 30,this);
 
+    }
+    public void renderScore(score s,Graphics media){
+        String h = ""+s.sc;
+        media.setColor(Color.cyan);
+        media.setFont(new Font("Consolas", 1, 50));
+        media.drawString(h, 580, 100);
     }
     
     @SuppressWarnings("unchecked")
@@ -155,41 +178,41 @@ public class View extends javax.swing.JFrame implements Observer{
     }// </editor-fold>//GEN-END:initComponents
 
     
-    public static void main(String args[]) throws Exception{
-        
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Model model = new Model();
-                View view = new View();
-                Controller controller = new Controller(model, view);
-                view.setVisible(true);
-                model.start();
-            }
-        });
-    }
+//    public static void main(String args[]) throws Exception{
+//        
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                Model model = new Model();
+//                View view = new View();
+//                Controller controller = new Controller(model, view);
+//                view.setVisible(true);
+//                model.start();
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
