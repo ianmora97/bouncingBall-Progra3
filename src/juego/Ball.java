@@ -34,11 +34,14 @@ public class Ball extends Actor {
             this.dy = normalSpeed * normalY + tangentSpeed * tangentY;
               
         }
-        if (((y + dy + this.getR() > b.a.getY()) || y + dy + this.getR() > b.a.getY() + b.a.getH()) 
-                && x + dx > b.a.getX() && x + dx < b.a.getX() + b.a.getW()) {
-            dy = dy - (dy * 2);
-        }
-        
+//        if (x + dx > b.a.getX() && x + dx < b.a.getX() + b.a.getW()) {
+////            dx = -dx;
+//            dy = -dy;
+            
+//        }
+        /*y + dy + this.getR() > b.a.getY()) || 
+                y + dy + this.getR() > b.a.getY() + b.a.getH()) 
+                && */
         
     }
 
