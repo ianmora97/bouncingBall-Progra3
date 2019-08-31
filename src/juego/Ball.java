@@ -9,49 +9,40 @@ public class Ball extends Actor {
     
     @Override
     public void move(Model b) {
-        Random r = new Random();
-        int valorDado;
-        
-        double dxa = this.x - b.c.r;
-        double dya = this.y - b.c.r;
-        double distanceFromCenter = Math.sqrt(dxa * dxa + dya * dya);
         
         
-        if(distanceFromCenter >= b.c.r - this.r){
-            valorDado = r.nextInt(5) + 1;
-            System.out.println("Rand: " + valorDado+ " Dx: " + dx + " Dy: " + dy);
-//            this.dx = this.dx - (this.dx * 2);
-//            this.dy = this.dy - (this.dy * 2);
-            switch(valorDado){
-                case 1: dx = -dx;  dy = -dy ; break;
-                case 2: 
-                    if(dy != 0){dx = 0; dy = dy; }
-                    else{break;}
-                    break;
-                case 3:
-                    if(dx != 0){dx = dx; dy = 0;}
-                    else{break;}
-                    break;
-                case 4:
-                    if(dy == 0){dx = dx; dy = 2;}
-                    else{break;}
-                    break;
-                case 5:
-                    if(dx == 0){dx = 2; dy = dy;}
-                    else{break;}
-                    break;
-                    
-            }
-        }
-        if((y+dy+this.getR()>b.a.getH()+b.a.getY())||y+dy-this.getR()<b.a.getY()){
-            dy= dy-(dy * 2);
-        }
+        boolean chocar = Math.sqrt( Math.pow((x + dx) - b.c.x, 2) + Math.pow((y + dy) - b.c.y, 2)) > (b.c.r - r);
         
         this.x += this.dx;
         this.y += this.dy;
+        
+        
+        if(chocar){
+            double dxa = this.x - b.c.x;
+            double dya = this.y - b.c.y;
+
+            double distanceFromCenter = Math.sqrt(dxa * dxa + dya * dya);
+            
+            double normalMagnitude = distanceFromCenter;
+            double normalX = dxa / normalMagnitude;
+            double normalY = dya / normalMagnitude;
+            double tangentX = -normalY;
+            double tangentY = normalX;
+            double normalSpeed = -(normalX * this.dx + normalY * this.dy);
+            double tangentSpeed = tangentX * this.dx + tangentY * this.dy;
+            this.dx = normalSpeed * normalX + tangentSpeed * tangentX;
+            this.dy = normalSpeed * normalY + tangentSpeed * tangentY;
+              
+        }
+        if (((y + dy + this.getR() > b.a.getY()) || y + dy + this.getR() > b.a.getY() + b.a.getH()) 
+                && x + dx > b.a.getX() && x + dx < b.a.getX() + b.a.getW()) {
+            dy = dy - (dy * 2);
+        }
+        
+        
     }
 
-    public Ball(int x, int y, int r, int dx, int dy) {
+    public Ball(int x, int y, int r, double dx, double dy) {
         super(x, y, dx, dy);
         this.r = r;
     }

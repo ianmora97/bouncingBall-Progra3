@@ -5,10 +5,10 @@ public abstract class Actor {
     public int x;
     public int y;
     
-    public int dx;
-    public int dy;
+    public double dx;
+    public double dy;
 
-    public Actor(int x, int y, int dx, int dy) {
+    public Actor(int x, int y, double dx, double dy) {
         this.x = x;
         this.y = y;
         this.dx = dx;
@@ -23,11 +23,11 @@ public abstract class Actor {
         this.y = y;
     }
 
-    public void setDx(int dx) {
+    public void setDx(double dx) {
         this.dx = dx;
     }
 
-    public void setDy(int dy) {
+    public void setDy(double dy) {
         this.dy = dy;
     }
 
@@ -39,11 +39,11 @@ public abstract class Actor {
         return y;
     }
 
-    public int getDx() {
+    public double getDx() {
         return dx;
     }
 
-    public int getDy() {
+    public double getDy() {
         return dy;
     }
     

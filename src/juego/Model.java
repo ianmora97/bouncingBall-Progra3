@@ -1,15 +1,16 @@
 
 package juego;
 
+import java.util.ArrayList;
 import java.util.Observable;
-import java.util.logging.Logger;
-import sun.util.logging.PlatformLogger;
+
 
 public class Model extends Observable {
     
     public Circulo c;
     public Ball b;
     public Racket a;
+    public ArrayList<Ball> listabolas;
     
     public static final int ARR = 1;
     public static final int ABA = 2;
@@ -17,12 +18,20 @@ public class Model extends Observable {
     public static final int DER = 4;
     
     public Model(){
-        c = new Circulo(10,35,300);
-        b = new Ball(300,300,40,2,2);
-        a = new Racket(150,430,75,20,0,0);
+        c = new Circulo(350,350,300);
+        b = new Ball(200,200,40,10,-10);
+        a = new Racket(300,300,100,30,0,0);
+        
+    }
+    public void reset(int esferas, int velocidad){
+        listabolas = new ArrayList<>();
+        for(int i=0; i<esferas; i++){
+            listabolas.add(new Ball(200,200, 40, velocidad, velocidad));
+        }
+        
     }
     public void start(){
-        final int delay = 20;
+        final int delay = 90;
         Runnable code = new Runnable() {
             @Override
             public void run() {
