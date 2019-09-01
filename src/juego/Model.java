@@ -20,8 +20,8 @@ public class Model extends Observable {
     public static final int DER = 4;
     
     public Model(){
-        c = new Circulo(350,350,300);
-        b = new Ball(300,300,30,3,-3);
+        c = new Circulo(350,350,310);
+        b = new Ball(350,350,40,2,2);
         a = new Racket(300,300,100,30,0,0);
         s = new score(0);
         setArcos();
@@ -47,7 +47,7 @@ public class Model extends Observable {
 
     }
     public void start(){
-        final int delay = 30;
+        final int delay = 10;
         Runnable code = new Runnable() {
             @Override
             public void run() {
@@ -68,10 +68,10 @@ public class Model extends Observable {
     }
     public void move(int flecha){
         switch(flecha){
-            case ARR: a.dy= -5; break;
-            case ABA: a.dy= 5; break;
-            case IZQ: a.dx= -5; break;
-            case DER: a.dx= 5; break;
+            case ARR: a.dy= -1; break;
+            case ABA: a.dy= 1; break;
+            case IZQ: a.dx= -1; break;
+            case DER: a.dx= 1; break;
         }
     }
     public void stopVer(){

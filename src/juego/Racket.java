@@ -12,12 +12,14 @@ public class Racket extends Actor {
     }
     @Override
     public void move(Model m) {
+        
 
+        
         
         
         x += dx;
         y += dy;
-        System.out.println("x: " + x + " y: "+ y);
+//        System.out.println("x: " + x + " y: "+ y);
     }
 
     public int getW() {
