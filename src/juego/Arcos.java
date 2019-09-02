@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juego.logic;
+package juego;
 
 public class Arcos {
     public int x,y,h,l,s,f;

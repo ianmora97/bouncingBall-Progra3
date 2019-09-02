@@ -1,12 +1,11 @@
 
-package juego.presentation;
+package juego;
 
-import juego.media;
-
-import juego.logic.Racket;
-import juego.logic.Ball;
-import juego.logic.Circulo;
+import juego.Racket;
+import juego.Ball;
+import juego.Circulo;
 import java.awt.Color;
+
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -22,7 +21,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 
 import javax.swing.JPanel;
-import juego.logic.score;
+import juego.score;
 
 
 public class JuegoPanel extends JPanel{

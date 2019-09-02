@@ -1,5 +1,5 @@
 
-package juego.presentation;
+package juego;
 
 public class Controller {
     Model model;

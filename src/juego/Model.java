@@ -1,15 +1,14 @@
 
-package juego.presentation;
+package juego;
 
-import juego.logic.Racket;
-import juego.logic.Ball;
-import juego.logic.Circulo;
-import juego.logic.Arcos;
+import juego.Racket;
+import juego.Ball;
+import juego.Circulo;
+import juego.Arcos;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicLongFieldUpdater;
-import juego.logic.score;
+import juego.score;
 
 
 public class Model extends Observable {

@@ -1,5 +1,5 @@
 
-package juego.presentation;
+package juego;
 
 import java.awt.Color;
 

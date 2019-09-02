@@ -1,8 +1,7 @@
-package juego.logic;
+package juego;
 import java.awt.Rectangle;
 import java.lang.Math;
 import java.util.Random;
-import juego.presentation.Model;
 
 public class Ball extends Actor {
 

@@ -1,7 +1,5 @@
 
-package juego.logic;
-
-import juego.presentation.Model;
+package juego;
 
 public abstract class Actor {
     public int x;

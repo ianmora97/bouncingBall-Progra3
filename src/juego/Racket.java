@@ -1,8 +1,7 @@
-package juego.logic;
+package juego;
 
 import java.awt.Rectangle;
 import java.lang.Math;
-import juego.presentation.Model;
 
 public class Racket extends Actor {
 

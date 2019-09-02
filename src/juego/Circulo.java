@@ -1,4 +1,4 @@
-package juego.logic;
+package juego;
 
 public class Circulo {
 
