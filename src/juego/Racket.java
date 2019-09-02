@@ -1,5 +1,7 @@
 package juego;
 
+import java.awt.Rectangle;
+
 public class Racket extends Actor {
 
     public int w;
@@ -19,7 +21,7 @@ public class Racket extends Actor {
         
         x += dx;
         y += dy;
-//        System.out.println("x: " + x + " y: "+ y);
+        System.out.println("x: " + x + " y: "+ y);
     }
 
     public int getW() {
@@ -29,5 +31,7 @@ public class Racket extends Actor {
     public int getH() {
         return h;
     }
-
+    public Rectangle getBounds() {
+	return new Rectangle(x, y, w, w);
+    }
 }

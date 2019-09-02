@@ -20,4 +20,10 @@ public class Controller {
     public void stopVer(){
         model.stopVer();
     }
+    public void pause(){
+        model.pause();
+    }
+    public void avanzar(){
+        model.avanzar();
+    }
 }

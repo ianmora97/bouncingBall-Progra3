@@ -3,6 +3,7 @@ package juego;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.concurrent.atomic.AtomicLongFieldUpdater;
 
 
 public class Model extends Observable {
@@ -14,51 +15,62 @@ public class Model extends Observable {
     public ArrayList<Arcos> listaArcos;
     public score s;
     
+    public int delayG = 20;
+    public boolean congelar;
+    final int delay = delayG;
+    
     public static final int ARR = 1;
     public static final int ABA = 2;
     public static final int IZQ = 3;
     public static final int DER = 4;
     
     public Model(){
-        c = new Circulo(350,350,310);
-        b = new Ball(350,350,40,2,2);
-        a = new Racket(300,300,100,30,0,0);
+        congelar = true;
+        c = new Circulo(340,340,300);
+        b = new Ball(350,175,30,10,10);
+        a = new Racket(300,300,100,30,0.0,0.0);
         s = new score(0);
+        listaArcos = new ArrayList<>();
+        listabolas = new ArrayList<>();
+        listabolas.add(b);
         setArcos();
     }
-    public void reset(int esferas, int velocidad){
-        listabolas = new ArrayList<>();
-        for(int i=0; i<esferas; i++){
-            listabolas.add(new Ball(200,200, 40, velocidad, velocidad));
+    
+    public void bolas(int esferas, int velocidad){
+        for(int i=0; i < esferas; i++){
+            listabolas.add(new Ball(300,75,30,9.5,9.5));
         }
+        delayG = velocidad;
         
     }
     private void setArcos(){
-        listaArcos = new ArrayList<>();
-        listaArcos.add(new Arcos(245,55,200,30,0,180));//n
-        listaArcos.add(new Arcos(245,620,200,30,180,180));//s
-        listaArcos.add(new Arcos(612,250,30,200,270,180));//e
-        listaArcos.add(new Arcos(49,250,30,200,90,180));//o
+        //green
+        listaArcos.add(new Arcos(245-22,55+12,200,30,0,180));//n
+        listaArcos.add(new Arcos(245-22,620+12,200,30,180,180));//s
+        listaArcos.add(new Arcos(612-22,250+12,30,200,270,180));//e
+        listaArcos.add(new Arcos(49-22,250+12,30,200,90,180));//o
         //red
-        listaArcos.add(new Arcos(70, 90, 350,350,110,50));//NO
-        listaArcos.add(new Arcos(300,90,300,300,20,50));//NE
-        listaArcos.add(new Arcos(80,300,300,300,190,60));//SO
-        listaArcos.add(new Arcos(300,300,300,300,300,50));//SE
+        listaArcos.add(new Arcos(70-22, 90+12, 350,350,110,50));//NO
+        listaArcos.add(new Arcos(300-22,90+12,300,300,20,50));//NE
+        listaArcos.add(new Arcos(80-22,300+12,300,300,190,60));//SO
+        listaArcos.add(new Arcos(300-22,300+12,300,300,300,50));//SE
 
     }
     public void start(){
-        final int delay = 10;
+        
         Runnable code = new Runnable() {
             @Override
             public void run() {
                 while(true){
-                    step();
-                    setChanged();
-                    notifyObservers();
-                    try {
-                        Thread.sleep(delay);
-                    } catch (InterruptedException ex) {
-                        //Logger.getLogger(Model.class.getName());
+                    while(congelar){
+                        step();
+                        setChanged();
+                        notifyObservers();
+                        try {
+                            Thread.sleep(delay);
+                        } catch (InterruptedException ex) {
+                            //Logger.getLogger(Model.class.getName());
+                        }
                     }
                 }
             }
@@ -66,12 +78,18 @@ public class Model extends Observable {
         Thread thread = new Thread(code);
         thread.start();
     }
+    public void pause(){
+        congelar = false;
+    }
+    public void avanzar(){
+        congelar = true;
+    }
     public void move(int flecha){
         switch(flecha){
-            case ARR: a.dy= -1; break;
-            case ABA: a.dy= 1; break;
-            case IZQ: a.dx= -1; break;
-            case DER: a.dx= 1; break;
+            case ARR: a.dy= -10; break;
+            case ABA: a.dy= 10; break;
+            case IZQ: a.dx= -10; break;
+            case DER: a.dx= 10; break;
         }
     }
     public void stopVer(){
@@ -81,7 +99,9 @@ public class Model extends Observable {
         a.dx = 0;
     }
     public void step(){
-        b.move(this);
+        for(int i=0;i<listabolas.size();i++){
+            listabolas.get(i).move(this);
+        }
         a.move(this);
         this.setChanged();
         this.notifyObservers();
@@ -102,7 +122,7 @@ public class Model extends Observable {
         return c;
     }
 
-    public Racket getA() {
+    public Racket getRacket() {
         return a;
     }
 }

@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
@@ -14,23 +16,82 @@ import java.awt.event.KeyAdapter;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 public class View extends JFrame implements Observer{
 
     Model model;
     Controller controller;
     JuegoPanel panel;
+    JMenuBar menu;
+    JMenu file,edit,about;
+    JMenuItem item,exit, settings;
     
     BufferedImage bf;
     
     public View() {
         panel = new JuegoPanel(model);
-               
-        this.setContentPane(panel);
-        bf = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
+        menu = new JMenuBar();
         
-        this.setSize(700,700);
+        item = new JMenuItem("Info");
+        exit = new JMenuItem("Salir");
+        settings = new JMenuItem("Settings");
+
+        file = new JMenu("File");
+        edit = new JMenu("Edit");
+        about = new JMenu("About");
+        
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                JOptionPane.showConfirmDialog(panel, "Trabajo relizado por Ian Mora Rodriguez");
+                
+                
+            }
+        });
+        exit.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        
+        settings.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editMenu(e);
+            }
+        });
+        edit.add(settings);
+        file.add(exit);
+        about.add(item);
+        
+        menu.add(file);
+        menu.add(edit);
+        menu.add(about);
+        
+        
+        
+        this.setContentPane(panel);
+        this.setJMenuBar(menu);
+        bf = new BufferedImage(700, 740, BufferedImage.TYPE_INT_RGB);
+        
+        this.setSize(646,740);
         this.setLocationRelativeTo(null);
+       // this.setResizable(false);
+        panel.setBackground(Color.BLACK);
+
         this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.addKeyListener(new java.awt.event.KeyAdapter(){
             @Override
@@ -45,7 +106,7 @@ public class View extends JFrame implements Observer{
         
         
     }
-
+    
     private void formKeyPressed(java.awt.event.KeyEvent evt){
         switch(evt.getKeyCode()){
                 case KeyEvent.VK_UP : controller.move(Model.ARR); break;
@@ -87,5 +148,63 @@ public class View extends JFrame implements Observer{
     public Controller getController() {
         return controller;
     }
-   
+    private void showEdit(){
+        edit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editMenu(evt);
+            }
+        });
+    }
+    
+    private void editMenu(ActionEvent evt){
+
+        
+        JFrame opciones = new JFrame();
+        opciones.getContentPane().setLayout(null);
+        String vels = ""+model.delayG;
+        
+        JLabel esfe = new JLabel("Esferas: ");
+        JLabel vel = new JLabel("Velocidad: ");
+        
+        JTextField esferas = new JTextField(model.listabolas.size());
+        JTextField abc = new JTextField(model.delayG);
+        
+         
+        JButton save = new JButton("Salvar");
+        
+        esfe.setBounds(20, 15, 50, 10);
+        esferas.setBounds(85, 10, 150, 25);
+        vel.setBounds(20, 45, 70, 10);
+        abc.setBounds(85, 40, 150, 25);
+        
+        save.setBounds(100, 70, 80, 20);
+        
+        
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.bolas(Integer.parseInt(esferas.getText()), Integer.parseInt(abc.getText()));
+                opciones.setVisible(false);
+            }
+        });
+        
+        
+        opciones.add(esfe);
+        opciones.add(vel);
+        opciones.add(esferas);
+        opciones.add(abc);
+        opciones.add(save);
+        
+        
+        opciones.setSize(300,150);
+        opciones.setLocationRelativeTo(null);
+        opciones.setResizable(false);
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        
+       
+        opciones.setVisible(true);
+
+    }
+    
 }

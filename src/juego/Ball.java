@@ -1,10 +1,14 @@
 package juego;
+import java.awt.Rectangle;
 import java.lang.Math;
 import java.util.Random;
 
 public class Ball extends Actor {
 
     public int r;
+    public boolean chocharRed;
+    public boolean chocharGreen = false;
+    public int speed = 10;
     
     public void cambiaDireccion(Model b){
         double dxa = this.x - b.c.x;
@@ -23,8 +27,11 @@ public class Ball extends Actor {
         this.dy = normalSpeed * normalY + tangentSpeed *  tangentY ;
         
         if(distanceFromCenter >= 300){
-            this.x = 300;
-            this.y = 300;
+            this.x = 200;
+            this.y = 75;
+        }
+        if((x  < 420 && x > 250 && y-r >= 60 && y-r <= 30) || (y-r <= 620 && y-r >= 650 && x>240 && x<430)){
+                b.s.sc += 1;
         }
     }
     @Override
@@ -35,30 +42,51 @@ public class Ball extends Actor {
         
         this.x += this.dx;
         this.y += this.dy;
-        
+        boolean collision = b.a.getBounds().intersects(getBounds());
         
         if(chocar){
-            cambiaDireccion(b);
             
-           
+            
+            //green
             if((x  < 420 && x > 250 && y-r >= 60 ) || (y-r <= 620  && x>240 && x<430)){
                 b.s.sc += 1;
-                
+                chocharGreen = true;
             }
             if((x-r-dx <= 95 && y >= 250 && y<= 465)||(x-r-dx >=550 && y >= 250 && y <= 465)){
                 b.s.sc += 1;
+                chocharGreen = true;
             }
+            //red
+            if((x  < 155 && x > 50 && y-r >= 110 && y-r <=210 ) || (x  < 560 && x > 480 && y-r >= 110 && y-r <= 200 )){
+                b.s.sc -= 1;
+                chocharRed = true;
+            }
+            if((x-r-dx <= 95 && y >= 250 && y<= 465)||(x-r-dx >=550 && y >= 250 && y <= 465)){
+                b.s.sc -= 1;
+                chocharGreen = true;
+            }
+            cambiaDireccion(b);
             
-            
-            
+           
+        }        
+        else if (collision && y < b.getRacket().getY() && x < b.getRacket().getX()) { //UP LEFT
+            dy = -speed;
+            dx = -speed;
+        } else if (collision && y < b.getRacket().getY() && x > b.getRacket().getX()) { //UP RIGHT
+            dy = -speed;
+            dx = speed;
+        } else if (collision && y > b.getRacket().getY() && x < b.getRacket().getX()) { //DOWN LEFT
+            dy = speed;
+            dx = -speed;
+        } else if (collision && y > b.getRacket().getY() && x > b.getRacket().getX()) { //DOWN RIGHT
+            dy = speed;
+            dx = speed;
         }
-
-//        if (( x + r < b.a.getX() + b.a.getW())) {
-//            dy = -dy;
-//        }
         
     }
-
+    public Rectangle getBounds() {
+	return new Rectangle(x, y, r*2, r*2);
+    }
     public Ball(int x, int y, int r, double dx, double dy) {
         super(x, y, dx, dy);
         this.r = r;
