@@ -79,7 +79,7 @@ public class Ball extends Actor {
             b.s.sc -= 1;
             chocharRed = true;
         }
-        if((x  < 570 && x > 500 && y-r >= 480 && y-r <= 580 ) || (x  < 130 && x > 60 && y-r >= 480 && y-r <= 580 )){
+        if((x-r  < 570 && x-r > 500 && y-r >= 480 && y-r <= 580 ) || (x-r-dx  < 130 && x-r-dx > 80 && y-r >= 480 && y-r <= 580 )){
             b.s.sc -= 1;
             chocharRed = true;
         }

@@ -3,6 +3,7 @@ package juego;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicLongFieldUpdater;
 
 
@@ -15,10 +16,10 @@ public class Model extends Observable {
     public ArrayList<Arcos> listaArcos;
     public score s;
     
-    public int delayG = 20;
+
     public boolean congelar;
-    final int delay = delayG;
-    
+    int delay = 20;
+    int cantidadBolas = 1;
     public static final int ARR = 1;
     public static final int ABA = 2;
     public static final int IZQ = 3;
@@ -27,7 +28,7 @@ public class Model extends Observable {
     public Model(){
         congelar = true;
         c = new Circulo(340,340,300);
-        b = new Ball(340,340,30,10.0,10.0);
+        b = new Ball(120,340,25,10.0,10.0);
         a = new Racket(300,300,100,30,0.0,0.0);
         s = new score(0);
         listaArcos = new ArrayList<>();
@@ -36,12 +37,22 @@ public class Model extends Observable {
         setArcos();
     }
     
-    public void bolas(int esferas, int velocidad){
-        for(int i=0; i < esferas; i++){
-            listabolas.add(new Ball(300,75,30,9.5,9.5));
+    public void bolas(int esferas, final int velocidad){
+        if(esferas < cantidadBolas){
+            for(int i=0; esferas == cantidadBolas; i++){
+                listabolas.remove(1);
+            }
         }
-        delayG = velocidad;
-        
+        else{
+            for(int i=0; i < esferas; i++){
+                Random r = new Random();
+                int valor = r.nextInt(300)+100;  
+                listabolas.add(new Ball(valor,150,25,9.5,9.5));
+            }
+        }
+        cantidadBolas = esferas;
+        delay = velocidad;
+        System.out.println(cantidadBolas);
     }
     private void setArcos(){
         //green
@@ -99,7 +110,7 @@ public class Model extends Observable {
         a.dx = 0;
     }
     public void step(){
-        for(int i=0;i<listabolas.size();i++){
+        for(int i=0;i<cantidadBolas;i++){
             listabolas.get(i).move(this);
         }
         a.move(this);

@@ -29,9 +29,13 @@ public class View extends JFrame implements Observer{
     JMenu file,edit,about;
     JMenuItem item,exit, settings;
     
+    
+    
     BufferedImage bf;
     
     public View() {
+        
+        
         panel = new JuegoPanel(model);
         menu = new JMenuBar();
         
@@ -78,6 +82,7 @@ public class View extends JFrame implements Observer{
         
         this.setContentPane(panel);
         this.setJMenuBar(menu);
+        
         bf = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
         
         this.setSize(680,750);
@@ -118,7 +123,6 @@ public class View extends JFrame implements Observer{
     @Override
     public void update(Observable o, Object arg){
         this.repaint();
-        
     }
     @Override
     public void paint(Graphics graphics){
@@ -155,7 +159,7 @@ public class View extends JFrame implements Observer{
         
         JFrame opciones = new JFrame();
         opciones.getContentPane().setLayout(null);
-        String cantE = ""+model.listabolas.size(), cantVel = ""+model.delayG;
+        String cantE = ""+model.cantidadBolas, cantVel = ""+model.delay;
         
         JLabel esfe = new JLabel("Esferas: ");
         JLabel vel = new JLabel("Velocidad: ");

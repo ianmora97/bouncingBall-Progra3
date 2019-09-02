@@ -42,11 +42,21 @@ public class JuegoPanel extends JPanel{
     
     Toolkit tool;
     Image ballGif;
+    ImageIcon ii;
+    JLabel imageLabel;
+    
     
     
     
     public JuegoPanel(Model m){
         this.model = m;
+        imageLabel = new JLabel();
+        ii = new ImageIcon(this.getClass().getResource("media/planet.gif"));
+        setLayout(null);
+        //imageLabel.setIcon(ii);
+        imageLabel.setBounds(20,100,100,100);
+        this.add(imageLabel);
+         
         try {
             win = this.loadSound(UH_PATH);
             lose = this.loadSound(LOSE_PATH);
@@ -71,6 +81,9 @@ public class JuegoPanel extends JPanel{
             
             ballGif = tool.getImage(this.getClass().getResource(BALL2_PATH));
         } catch (Exception ex) {}
+        
+        
+        
     }
     Clip loadSound(String path){
         try {
@@ -90,17 +103,13 @@ public class JuegoPanel extends JPanel{
     }
     
     void renderModel(Model m, Graphics media){
-        
-            
         renderCircle(m.c,media);
        // renderStars(media);
         renderRacket(m.a,media);
-        for(int i=0; i < m.listabolas.size() ; i++){
+        for(int i=0; i < m.cantidadBolas ; i++){
              renderBall(m.listabolas.get(i),media);
         }
         renderScore(m.s, media);
-        
-
     }
     
     public void renderBall(Ball b, Graphics media){
@@ -119,29 +128,19 @@ public class JuegoPanel extends JPanel{
     }
     public void renderRacket(Racket r, Graphics media){
         media.drawImage(raquet, (int)(r.x), (int)(r.y)+46, r.w ,r.h ,this);
-        
-        
     }
     public void renderCircle(Circulo r, Graphics media){
         media.drawImage(fondoCirculo, 8, 80, r.r *2 +50, r.r *2 +50,this);
-        
     }
     public void renderScore(score s,Graphics media){
         String h = "Score: "+s.sc;
         media.setColor(Color.cyan);
         media.setFont(new Font("Consolas", 1, 30));
-        media.drawString(h, 470, 80+46);
+        media.drawString(h, 470, 100);
     }
     public void renderStars(Graphics mediaGraphics){
         mediaGraphics.drawImage(ballGif, 10, 10, 800,800,this);
     }
     
-//    @Override
-//    public void paintComponent(Graphics g){
-//        
-//        super.paintComponent(g);
-//        renderModel(model, g);
-//        
-//   }
    
 }
