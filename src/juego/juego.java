@@ -5,6 +5,10 @@
  */
 package juego;
 
+import juego.presentation.Controller;
+import juego.presentation.Model;
+import juego.presentation.View;
+
 /**
  *
  * @author Ian Rodriguez
