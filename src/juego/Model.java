@@ -27,7 +27,7 @@ public class Model extends Observable {
     public Model(){
         congelar = true;
         c = new Circulo(340,340,300);
-        b = new Ball(350,175,30,10,10);
+        b = new Ball(340,340,30,10.0,10.0);
         a = new Racket(300,300,100,30,0.0,0.0);
         s = new score(0);
         listaArcos = new ArrayList<>();

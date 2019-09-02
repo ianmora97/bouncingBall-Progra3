@@ -1,6 +1,7 @@
 package juego;
 
 import java.awt.Rectangle;
+import java.lang.Math;
 
 public class Racket extends Actor {
 
@@ -12,18 +13,32 @@ public class Racket extends Actor {
         this.w = w;
         this.h = h;
     }
+    
+           
+    public boolean colision(Model b) {
+        return (Math.sqrt(Math.pow(this.x+this.dx - b.c.x, 2) + Math.pow(this.y+this.dy - b.c.y, 2)) >( b.c.r));
+    }
+    public boolean colision2(Model b) {
+        return Math.sqrt(Math.pow(this.w+x+this.dx - b.c.x, 2) + Math.pow(this.h+y+this.dy - b.c.y, 2)) >( b.c.r);
+    }
+    public boolean colision3(Model b) {
+        return Math.sqrt(Math.pow(this.x+w+this.dx - b.c.x, 2) + Math.pow(this.y+this.dy - b.c.y, 2)) >( b.c.r);
+    }
+    public boolean colision4(Model b) {
+        return Math.sqrt(Math.pow(this.x+this.dx - b.c.x, 2) + Math.pow(this.y+h+this.dy - b.c.y, 2)) >( b.c.r);
+    }
+    
     @Override
     public void move(Model m) {
-        
-
-        
-        
-        
-        x += dx;
-        y += dy;
+        if(colision(m) || colision2(m) || colision3(m) || colision4(m)){
+            dx=0;
+            dy=0;
+        }
+        x +=  dx;
+        y +=  dy;
         System.out.println("x: " + x + " y: "+ y);
     }
-
+    
     public int getW() {
         return w;
     }

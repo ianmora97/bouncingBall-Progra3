@@ -99,34 +99,14 @@ public class JuegoPanel extends JPanel{
              renderBall(m.listabolas.get(i),media);
         }
         renderScore(m.s, media);
-        for(int i=0;i<4;i++){
-            renderArcs(m.listaArcos.get(i), media);
-            
-        }
-        for(int i=4;i<8;i++){
-            renderArcsRed(m.listaArcos.get(i), media);
-           
-        }
         
+
     }
-    public void renderArcs(Arcos r, Graphics media){
-        media.setColor(Color.GREEN);
-        int ya = r.y +46;
-        media.fillArc(r.x, ya, r.h, r.l, r.s, r.f);
-        media.drawArc(r.x, ya, r.h, r.l, r.s, r.f);
-    }
-    public void renderArcsRed(Arcos r, Graphics media){
-        media.setColor(Color.RED);
-        
-        media.drawArc(r.x, r.y+46, r.h, r.l, r.s, r.f);
-        media.drawArc(r.x+2, r.y+2+46, r.h, r.l, r.s, r.f);
-        media.drawArc(r.x+1, r.y+1+46, r.h, r.l, r.s, r.f);
-    }
+    
     public void renderBall(Ball b, Graphics media){
         media.drawImage(ball, (int)(b.x-b.r), (int)(b.y-b.r)+46,2* b.r ,2* b.r ,this);
         
         if(b.chocharGreen){
-            
             win.start();
             win.setFramePosition(0);
             b.chocharGreen = false;
@@ -140,9 +120,11 @@ public class JuegoPanel extends JPanel{
     public void renderRacket(Racket r, Graphics media){
         media.drawImage(raquet, (int)(r.x), (int)(r.y)+46, r.w ,r.h ,this);
         
+        
     }
     public void renderCircle(Circulo r, Graphics media){
-        media.drawImage(fondoCirculo, 8, 100, r.r *2+30, r.r *2 +30,this);
+        media.drawImage(fondoCirculo, 8, 80, r.r *2 +50, r.r *2 +50,this);
+        
     }
     public void renderScore(score s,Graphics media){
         String h = "Score: "+s.sc;

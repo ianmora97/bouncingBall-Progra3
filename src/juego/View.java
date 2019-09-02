@@ -2,20 +2,16 @@
 package juego;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+
 import java.awt.Graphics;
-import java.awt.Image;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyAdapter;
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -23,8 +19,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 
 public class View extends JFrame implements Observer{
 
@@ -52,9 +46,8 @@ public class View extends JFrame implements Observer{
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                JOptionPane.showConfirmDialog(panel, "Trabajo relizado por Ian Mora Rodriguez");
-                
+                JOptionPane.showConfirmDialog(panel, 
+                 "Dodge Ball 1.0 - Programacion III - Escuela de Informatica - UNA - IAN MORA RODRIGUEZ");
                 
             }
         });
@@ -85,11 +78,11 @@ public class View extends JFrame implements Observer{
         
         this.setContentPane(panel);
         this.setJMenuBar(menu);
-        bf = new BufferedImage(700, 740, BufferedImage.TYPE_INT_RGB);
+        bf = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
         
-        this.setSize(646,740);
+        this.setSize(680,750);
         this.setLocationRelativeTo(null);
-       // this.setResizable(false);
+        this.setResizable(false);
         panel.setBackground(Color.BLACK);
 
         this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -162,13 +155,13 @@ public class View extends JFrame implements Observer{
         
         JFrame opciones = new JFrame();
         opciones.getContentPane().setLayout(null);
-        String vels = ""+model.delayG;
+        String cantE = ""+model.listabolas.size(), cantVel = ""+model.delayG;
         
         JLabel esfe = new JLabel("Esferas: ");
         JLabel vel = new JLabel("Velocidad: ");
         
-        JTextField esferas = new JTextField(model.listabolas.size());
-        JTextField abc = new JTextField(model.delayG);
+        JTextField esferas = new JTextField(cantE);
+        JTextField abc = new JTextField(cantVel);
         
          
         JButton save = new JButton("Salvar");
