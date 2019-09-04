@@ -109,7 +109,7 @@ public class JuegoPanel extends JPanel{
     }
     
     public void renderBall(Ball b, Graphics media){
-        media.drawImage(ball, (int)(b.x-b.r), (int)(b.y-b.r)+46,2* b.r ,2* b.r ,this);
+        media.drawImage(ball, (b.x-b.r), (b.y-b.r)+46,2* b.r ,2* b.r ,this);
         
         if(b.chocharGreen){
             win.start();

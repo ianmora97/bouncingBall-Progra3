@@ -24,10 +24,12 @@ public class View extends JFrame implements Observer{
 
     Model model;
     Controller controller;
+    
     JuegoPanel panel;
+    
     JMenuBar menu;
     JMenu file,edit,about;
-    JMenuItem item,exit, settings;
+    JMenuItem item ,exit, settings;
     
     
     
@@ -70,6 +72,7 @@ public class View extends JFrame implements Observer{
                 editMenu(e);
             }
         });
+        
         edit.add(settings);
         file.add(exit);
         about.add(item);
@@ -111,6 +114,7 @@ public class View extends JFrame implements Observer{
                 case KeyEvent.VK_DOWN : controller.move(Model.ABA); break;
                 case KeyEvent.VK_LEFT : controller.move(Model.IZQ); break;
                 case KeyEvent.VK_RIGHT : controller.move(Model.DER); break;
+                    /*Nuevo commit*/
         }
     }
     private void formKeyReleased(java.awt.event.KeyEvent evt){
