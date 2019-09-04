@@ -120,6 +120,9 @@ public class Model extends Observable {
         a.move(this);
         this.setChanged();
         this.notifyObservers();
+        /*
+        Otro comentario
+        */
     }
     
     @Override
