@@ -114,7 +114,7 @@ public class View extends JFrame implements Observer{
                 case KeyEvent.VK_DOWN : controller.move(Model.ABA); break;
                 case KeyEvent.VK_LEFT : controller.move(Model.IZQ); break;
                 case KeyEvent.VK_RIGHT : controller.move(Model.DER); break;
-                    /*Nuevo commit*/
+                    
         }
     }
     private void formKeyReleased(java.awt.event.KeyEvent evt){
